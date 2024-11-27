@@ -12,10 +12,10 @@ const mongoose = require('mongoose')
 const Todo = require('./models/customer')
 const connect = async () => {
   await mongoose.connect(process.env.MONGODB_URI)
-  console.log('connected to DB')
+  //console.log('connected to DB')
   await runQueries()
   await mongoose.disconnect()
-  console.log('dis DB')
+  //console.log('dis DB')
   process.exit()
 }
 const checkInput = async () => {
@@ -33,27 +33,26 @@ const checkInput = async () => {
       { age: newAge }
     )
   } else if (userChoice === '2') {
+    //findTodos()
     const todos = await Todo.find({})
     console.log('All customers:', todos)
+  } else if (userChoice === '5') {
+    mongoose.connection.close()
+  } else if (userChoice === '1') {
+    // createTodo()
+    const todoData = {
+      name: 'Zainab',
+      age: 21
+    }
+    const todo = await Todo.create(todoData)
+    console.log('new todo ', todo)
+  } else if (userChoice === '4') {
+    const idToRemove = prompt('Enter the customer id you want to remove: ')
+    const removedTodo = await Todo.findByIdAndDelete(idToRemove)
   }
 }
 const runQueries = async () => {
-  //await createTodo()
-  // await findTodos()
   await checkInput()
 }
 
-// const createTodo = async () => {
-//   const todoData = {
-//     id: '65825d1ead6cd90c5c430e24',
-//     name: 'Vivienne',
-//     age: 6
-//   }
-//   const todo = await Todo.create(todoData)
-//   console.log('new todo ', todo)
-// }
-const findTodos = async () => {
-  const todos = await Todo.find()
-  console.log('All: ', todos)
-}
 connect()
