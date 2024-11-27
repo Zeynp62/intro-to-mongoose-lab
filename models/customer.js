@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 const customerSchema = new mongoose.Schema({
-  id: String,
+  // id: String,
   name: String,
   age: Number
 })

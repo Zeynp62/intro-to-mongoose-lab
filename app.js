@@ -18,18 +18,26 @@ const connect = async () => {
   console.log('dis DB')
   process.exit()
 }
-const checkInput = () => {
-  if (userChoice === 3) {
+const checkInput = async () => {
+  if (userChoice === '3') {
     console.log('Below is a list of customers:')
     findTodos()
     const idInput = prompt(
       'Copy and paste the id of the customer you would like to update here:'
+    )
+    const newName = prompt('What is the customers new name?')
+    const newAge = prompt('What is the customers new age?')
+    const updatedTodo = await Todo.findByIdAndUpdate(
+      idInput,
+      { name: newName },
+      { age: newAge }
     )
   }
 }
 const runQueries = async () => {
   //await createTodo()
   await findTodos()
+  await checkInput()
 }
 
 // const createTodo = async () => {
