@@ -32,11 +32,14 @@ const checkInput = async () => {
       { name: newName },
       { age: newAge }
     )
+  } else if (userChoice === '2') {
+    const todos = await Todo.find({})
+    console.log('All customers:', todos)
   }
 }
 const runQueries = async () => {
   //await createTodo()
-  await findTodos()
+  // await findTodos()
   await checkInput()
 }
 
